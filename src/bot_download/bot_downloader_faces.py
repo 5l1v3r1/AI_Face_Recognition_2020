@@ -66,7 +66,7 @@ def bot(name_file):
     bot.close_browser()
 
 def main():
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 or sys.argv[1] == '-h' or sys.argv[1] == '--help':
         help()
     else:
         bot(sys.argv[1])
