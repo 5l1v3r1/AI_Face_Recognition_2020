@@ -7,6 +7,7 @@ import time
 import datetime
 import sys
 import os
+import sys
 
 class Brain:
     def __init__(self, nameset):
@@ -41,8 +42,15 @@ class Brain:
             self.sleeping(5)
             self.page.save_screenshot(content + "_" + str(i) + ".png")
 
-def main():
-    fd = open("names.txt", 'r')
+def help():
+    print("\n---BOT_DOWNLOADER---\n\nUSAGE:\tpython3 [bot_file].py [names_file]")
+    print("\nDESCRIPTION:\n\tThis file contains a bot that load a name_file")
+    print("\tConnect itself on www.google.com/img")
+    print("\tAnd takes screenshots to build a dataset of unknown_faces for face_recognition projects")
+    print("\tYou may need to install selenium and geckodriver to use it\n")
+
+def bot(name_file):
+    fd = open(name_file, 'r')
     nameset = fd.read()
     nameset = nameset.splitlines()
     current_name = nameset[1]
@@ -56,6 +64,15 @@ def main():
         bot.page.get(bot.url)
     fd.close()
     bot.close_browser()
+
+def main():
+    if len(sys.argv) != 2:
+        help()
+    else:
+        bot(sys.argv[1])
+        print("Bot succesfully takes screenshot\n")
+
+
 
 if __name__ == "__main__":
     main()
